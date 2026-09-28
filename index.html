@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<style>
+
+		@font-face{
+			font-family: "Helvetica Medium Extended";
+			src: url("HelveticaNeueLTStd-MdEx-BF6a4c33b8180fa.otf");
+		}
+
+		@font-face{
+			font-family: "Helvetica Extended";
+			src: url("HelveticaNeueLTStd-Ex-BF6a4c33b81693a.otf");
+		}
+
+
+		body{
+			margin: 0;
+			background: #eeeeec;
+			color: #111111;
+			font-family: "Helvetica Extended", sans-serif;
+			text-align: center;
+			padding-bottom: 60px;
+		}
+
+
+		h1{
+			font-family: "Helvetica Medium Extended", sans-serif;
+			font-size: 100px;
+			font-weight: 400;
+			margin-top: 80px;
+			margin-bottom: 5px;
+			letter-spacing: -1px;
+		}
+
+
+		h1 + p{
+			font-size: 20px;
+			letter-spacing: 2px;
+			margin-top: -10px;
+			margin-bottom: 70px;
+		}
+
+
+		#frameName{
+			font-family: "Helvetica Extended", sans-serif;
+			font-size: 16px;
+			letter-spacing: 3px;
+			margin-bottom: 40px;
+		}
+
+
+		#glasses{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 70px;
+		}
+
+
+		#leftLens, #rightLens{
+			width: 200px;
+			height: 200px;
+
+			border: 12px solid black;
+			border-radius: 50%;
+
+			background: rgba(180, 200, 210, 0.15);
+
+			box-sizing: border-box;
+		}
+
+
+		#bridge{
+			width: 40px;
+			height: 12px;
+			background: black;
+			flex-shrink: 0;
+		}
+
+	</style>
+</head>
+
+
+<body>
+
+	<h1>MY FRAME</h1>
+	<p>DESIGN YOUR OWN FRAME</p>
+
+
+	<h2 id="frameName">UNTITLED 01</h2>
+
+
+	<div id="glasses">
+		<div id="leftLens"></div>
+		<div id="bridge"></div>
+		<div id="rightLens"></div>
+	</div>
+
+
+	<p>FRAME SIZE</p>
+	<input type="range" id="frameSize" min="150" max="300" value="200">
+
+
+	<p>FRAME SHAPE</p>
+	<input type="range" id="frameShape" min="0" max="80" value="0">
+
+
+	<p>FRAME THICKNESS</p>
+	<input type="range" id="frameThickness" min="0" max="20" value="12">
+
+
+	<p>FRAME COLOR</p>
+	<input type="color" id="frameColor" value="#000000">
+
+
+	<p>BACKGROUND COLOR</p>
+	<input type="color" id="backColor" value="#eeeeec">
+
+
+	<p>NAME YOUR FRAME</p>
+	<input type="text" id="nameInput">
+
+
+
+	<script>
+
+		frameSize.oninput = function(){
+
+			leftLens.style.width = frameSize.value + "px";
+			rightLens.style.width = frameSize.value + "px";
+
+			leftLens.style.height = frameSize.value - frameShape.value + "px";
+			rightLens.style.height = frameSize.value - frameShape.value + "px";
+
+			bridge.style.width = frameSize.value / 5 + "px";
+
+		}
+
+
+
+		frameShape.oninput = function(){
+
+			leftLens.style.height = frameSize.value - frameShape.value + "px";
+			rightLens.style.height = frameSize.value - frameShape.value + "px";
+
+			leftLens.style.borderRadius = 50 - frameShape.value / 2 + "%";
+			rightLens.style.borderRadius = 50 - frameShape.value / 2 + "%";
+
+		}
+
+
+
+		frameColor.oninput = function(){
+
+			leftLens.style.borderColor = frameColor.value;
+			rightLens.style.borderColor = frameColor.value;
+
+			bridge.style.background = frameColor.value;
+
+		}
+
+
+		frameThickness.oninput = function(){
+
+			leftLens.style.borderWidth = frameThickness.value + "px";
+			rightLens.style.borderWidth = frameThickness.value + "px";
+
+		}
+
+
+		backColor.oninput = function(){
+
+			document.body.style.background = backColor.value;
+
+		}
+
+
+
+		nameInput.oninput = function(){
+
+			frameName.innerHTML = nameInput.value;
+
+		}
+
+
+	</script>
+
+</body>
+</html>
